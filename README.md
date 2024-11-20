@@ -1,20 +1,19 @@
-# threepp custom project
+# Pong Game 🎮
 
-This is a simple example of how to use consume [threepp](https://github.com/markaren/threepp) using CMake's FetchContent.
+A classic Pong game implemented in [your preferred programming language]. 
+This project is a fun and straightforward recreation of the iconic two-player arcade game.
 
-Includes Imgui as a bundled dependency.
+---
 
+## Features
+- **Single-player mode**: Play against a computer opponent.
+- **Two-player mode**: Challenge a friend in a local multiplayer match.
+- **Customizable settings**: Adjust paddle speed, ball speed, and game difficulty.
+- **Score tracking**: Keep track of scores during the match.
 
-### Using vcpkg (manifest mode)
+---
 
-This project includes `vcpkg.json`, but does not use it. 
-
-You may add dependencies on your own and
-call all CMake with `-DCMAKE_TOOLCHAIN_FILE=[path to vcpkg]/scripts/buildsystems/vcpkg.cmake`
-
-##### vcpkg under mingw
-Under MinGW you'll need to specify the vcpkg triplet:
-```shell
--DVCPKG_TARGET_TRIPLET=x64-mingw-[static|dynamic]  # choose either `static` or `dynamic`.
--DVCPKG_HOST_TRIPLET=x64-mingw-[static|dynamic]    # <-- needed only if MSVC cannot be found. 
-```
+## How to Play
+1. Run the game using [instructions specific to your setup].
+2. Use the following controls to move your paddle:
+   - **Player 1**: `
