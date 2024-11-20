@@ -10,6 +10,7 @@ This project is a fun and straightforward recreation of the iconic two-player ar
 - **Two-player mode**: Challenge a friend in a local multiplayer match.
 - **Customizable settings**: Adjust paddle speed, ball speed, and game difficulty.
 - **Score tracking**: Keep track of scores during the match.
+- **Fun**: Have the time of your life.
 
 ---
 
