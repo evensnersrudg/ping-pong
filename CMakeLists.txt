@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(threepp_imgui_demo)
+project(PingPong)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -16,12 +16,22 @@ FetchContent_MakeAvailable(threepp)
 
 add_subdirectory(external)
 
-add_executable(threepp_demo main.cpp)
+# Include header files directory
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
+# Add executable and sources
+add_executable(threepp_demo main.cpp
+        include/ting_man_kan_justere_i_spillet/Ball.h
+        src/ting_man_kan/Ball.cpp
+        include/ting_man_kan_justere_i_spillet/Frame.h
+        src/ting_man_kan/Frame.cpp
+        include/ting_man_kan_justere_i_spillet/Racket.h
+        src/ting_man_kan/Racket.cpp)
+
+# Link libraries
 target_link_libraries(threepp_demo PRIVATE threepp::threepp imgui::imgui)
 
-
 ######### Emscripten #######
-# This part is only needed if you want to compile to a WEB application
 if (DEFINED EMSCRIPTEN)
 
     set(LINK_FLAGS " --bind -sUSE_GLFW=3 -sGL_DEBUG=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \

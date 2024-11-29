@@ -1,57 +1,76 @@
 #include "threepp/threepp.hpp"
-
-#include "threepp/extras/imgui/ImguiContext.hpp"
+#include "ting_man_kan_justere_i_spillet/Ball.h"
+#include "ting_man_kan_justere_i_spillet/Frame.h"
+#include "ting_man_kan_justere_i_spillet/Racket.h"
+#include <GLFW/glfw3.h> // Inkluder riktig GLFW-header
 
 using namespace threepp;
 
-namespace {
-
-    auto createMesh() {
-        const auto geometry = BoxGeometry::create();
-        const auto material = MeshBasicMaterial::create();
-        material->color = Color::green;
-
-        auto mesh = Mesh::create(geometry, material);
-
-        return mesh;
-    }
-
-}
-
 int main() {
+    // Dimensjoner for spilleområdet
+    float width = 800;
+    float length = 600;
 
-    Canvas canvas;
+    // Opprett vindu og Canvas
+    Canvas canvas{
+        {"fullscreen", false} // Sett til `true` hvis du ønsker fullskjerm
+    };
+
+    GLFWwindow* window = canvas.window(); // Hent GLFW-vindu fra Canvas
+
     GLRenderer renderer{canvas.size()};
 
-    PerspectiveCamera camera(60, canvas.aspect(), 0.1, 1000);
-    camera.position.z = 5;
+    // Sett opp kameraet
+    PerspectiveCamera camera(75, canvas.aspect(), 0.1, 2000);
+    camera.position.z = std::max(width, length) * 1.2f;
 
+    // Opprett scene og sett bakgrunnsfarge
     Scene scene;
     scene.background = Color::aliceblue;
 
-    auto mesh = createMesh();
-    scene.add(mesh);
+    // Opprett rammen (spilleområdet)
+    Frame frame(width, length);
+    frame.addToScene(scene);
 
-    bool& meshVisible = mesh->visible;
+    // Opprett ballen
+    Ball ball(10, {1.0, 5.0}, 500);
+    scene.add(ball.getMesh());
 
-    ImguiFunctionalContext ui(canvas.windowPtr(), [&meshVisible] {
-        ImGui::SetNextWindowPos({}, 0, {});
-               ImGui::SetNextWindowSize({230, 0}, 0);
-               ImGui::Begin("Mesh settings");
-               ImGui::Checkbox("Visible", &meshVisible);
+    // Opprett racketene
+    Racket leftRacket({-width / 2 + 50, 0, 0}, 20, 100, GLFW_KEY_W, GLFW_KEY_S);
+    Racket rightRacket({width / 2 - 50, 0, 0}, 20, 100, GLFW_KEY_UP, GLFW_KEY_DOWN);
+    leftRacket.addToScene(scene);
+    rightRacket.addToScene(scene);
 
-               ImGui::End();
-    });
-    // ui.makeDpiAware(); // to increase imgui size on high DPI screens
+    // Beregn grensene for spilleområdet
+    float leftBorder = -width / 2 + ball.getRadius();
+    float rightBorder = width / 2 - ball.getRadius();
+    float bottomBorder = -length / 2 + ball.getRadius();
+    float topBorder = length / 2 - ball.getRadius();
 
+    // Klokke for tidsdifferanse
     Clock clock;
-    float rotationSpeed = 0.5f;
+
+    // Animere sløyfen
     canvas.animate([&] {
-        const auto dt = clock.getDelta();
+        const auto dt = clock.getDelta(); // Tidsdifferanse mellom rammer
 
-        mesh->rotation.y += rotationSpeed * dt;
+        // Lytt til tastetrykk for racketene
+        bool leftUp = glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS;
+        bool leftDown = glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS;
+        bool rightUp = glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS;
+        bool rightDown = glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS;
 
+        // Oppdater racketenes posisjon
+        leftRacket.update(dt, leftUp, leftDown);
+        rightRacket.update(dt, rightUp, rightDown);
+
+        // Oppdater ballens posisjon og sjekk for kollisjoner
+        ball.update(dt, leftBorder, rightBorder, bottomBorder, topBorder);
+
+        // Render scenen
         renderer.render(scene, camera);
-        ui.render();
     });
+
+    return 0;
 }
