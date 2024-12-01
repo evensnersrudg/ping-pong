@@ -1,42 +1,33 @@
 #include "ting_man_kan_justere_i_spillet/Ball.h"
+using namespace threepp;
 
-Ball::Ball(float radius, const Vector2& initialVelocity, float speed)
-    : radius_(radius), velocity_(initialVelocity), speed_(speed) {
+Ball::Ball() {
+    auto geometry = SphereGeometry::create(0.5f, 32, 32);
+    auto material = MeshBasicMaterial::create();
+    material->color = Color::darkred;
 
-    const auto geometry = CircleGeometry::create(radius);
-    const auto material = MeshBasicMaterial::create();
-    material->color = Color::green;
-
-    mesh_ = Mesh::create(geometry, material);
+    ballMesh_ = Mesh::create(geometry, material);
+    reset();
 }
 
-void Ball::update(float dt, float leftBorder, float rightBorder, float bottomBorder, float topBorder) {
-    mesh_->position.x += velocity_.x * dt * speed_;
-    mesh_->position.y += velocity_.y * dt * speed_;
+void Ball::update(float delta) {
+    ballMesh_->position.x += velocity_.x * delta;
+    ballMesh_->position.y += velocity_.y * delta;
+}
 
-    // Kollisjonssjekk og oppdatering av retning
-    if (mesh_->position.x <= leftBorder) {
-        mesh_->position.x = leftBorder;
-        velocity_.x = -velocity_.x;
-    }
-    if (mesh_->position.x >= rightBorder) {
-        mesh_->position.x = rightBorder;
-        velocity_.x = -velocity_.x;
-    }
-    if (mesh_->position.y <= bottomBorder) {
-        mesh_->position.y = bottomBorder;
-        velocity_.y = -velocity_.y;
-    }
-    if (mesh_->position.y >= topBorder) {
-        mesh_->position.y = topBorder;
-        velocity_.y = -velocity_.y;
-    }
+void Ball::reset() {
+    ballMesh_->position.set(0, 0, 0);
+    velocity_.set(speed_, speed_);
+}
+
+void Ball::invertVelocityX() {
+    velocity_.x = -velocity_.x;
+}
+
+void Ball::invertVelocityY() {
+    velocity_.y = -velocity_.y;
 }
 
 std::shared_ptr<Mesh> Ball::getMesh() const {
-    return mesh_;
-}
-
-float Ball::getRadius() const {
-    return radius_;
+    return ballMesh_;
 }

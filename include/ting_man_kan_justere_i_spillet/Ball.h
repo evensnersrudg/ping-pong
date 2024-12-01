@@ -1,26 +1,24 @@
 #ifndef BALL_H
 #define BALL_H
 
-#include "threepp/threepp.hpp"
-
-using namespace threepp;
+#include <threepp/threepp.hpp>
 
 class Ball {
 public:
-    Ball(float radius, const Vector2& initialVelocity, float speed);
+    Ball();
 
-    void update(float dt, float leftBorder, float rightBorder, float bottomBorder, float topBorder);
+    void update(float delta);
+    void reset();
 
-    std::shared_ptr<Mesh> getMesh() const;
+    void invertVelocityX();
+    void invertVelocityY();
 
-    float getRadius() const;
+    std::shared_ptr<threepp::Mesh> getMesh() const;
 
 private:
-    float radius_;
-    Vector2 velocity_;
-    float speed_;
-    std::shared_ptr<Mesh> mesh_;
+    std::shared_ptr<threepp::Mesh> ballMesh_;
+    threepp::Vector2 velocity_;
+    float speed_ = 10.0f;
 };
 
-
-#endif //BALL_H
+#endif // BALL_H

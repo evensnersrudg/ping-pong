@@ -7,16 +7,15 @@ using namespace threepp;
 
 class Frame {
 public:
-    // Constructor with width and length
     Frame(float width, float length);
-
     void addToScene(Scene& scene) const;
+    std::tuple<float, float, float, float> getBorders(float ballRadius) const;
 
 private:
     std::shared_ptr<Line> createBorderLine(float startX, float startY, float endX, float endY) const;
 
-    float width_;  // Width of the frame
-    float length_; // Length of the frame
+    float width_;
+    float length_;
     std::vector<std::shared_ptr<Line>> borders_;
 };
 

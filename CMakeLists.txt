@@ -25,8 +25,13 @@ add_executable(threepp_demo main.cpp
         src/ting_man_kan/Ball.cpp
         include/ting_man_kan_justere_i_spillet/Frame.h
         src/ting_man_kan/Frame.cpp
-        include/ting_man_kan_justere_i_spillet/Racket.h
-        src/ting_man_kan/Racket.cpp)
+        include/ting_man_kan_justere_i_spillet/Paddle.h
+        src/ting_man_kan/Paddle.cpp
+        include/ting_man_kan_justere_i_spillet/PaddleController.h
+        src/ting_man_kan/PaddleController.cpp
+        include/ting_man_kan_justere_i_spillet/Game.h
+        src/ting_man_kan/Game.cpp
+)
 
 # Link libraries
 target_link_libraries(threepp_demo PRIVATE threepp::threepp imgui::imgui)

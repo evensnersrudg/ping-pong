@@ -14,6 +14,15 @@ void Frame::addToScene(Scene& scene) const {
     }
 }
 
+std::tuple<float, float, float, float> Frame::getBorders(float ballRadius) const {
+    return {
+        -width_ + ballRadius,  // Left border
+         width_ - ballRadius,  // Right border
+        -length_ + ballRadius, // Bottom border
+         length_ - ballRadius  // Top border
+    };
+}
+
 std::shared_ptr<Line> Frame::createBorderLine(float startX, float startY, float endX, float endY) const {
     auto geometry = BufferGeometry::create();
     std::vector<float> vertices = {startX, startY, 0, endX, endY, 0};
