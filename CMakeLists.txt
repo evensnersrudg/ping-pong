@@ -3,8 +3,10 @@ project(PingPong)
 
 set(CMAKE_CXX_STANDARD 20)
 
+# Fetch necessary libraries
 include(FetchContent)
 
+# Fetch Threepp
 set(THREEPP_BUILD_TESTS OFF)
 set(THREEPP_BUILD_EXAMPLES OFF)
 FetchContent_Declare(
@@ -14,38 +16,26 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(threepp)
 
-add_subdirectory(external)
-
-# Include header files directory
-include_directories(${CMAKE_SOURCE_DIR}/include)
-
-# Add executable and sources
-add_executable(threepp_demo main.cpp
-        include/ting_man_kan_justere_i_spillet/Ball.h
-        src/ting_man_kan/Ball.cpp
-        include/ting_man_kan_justere_i_spillet/Frame.h
-        src/ting_man_kan/Frame.cpp
-        include/ting_man_kan_justere_i_spillet/Paddle.h
-        src/ting_man_kan/Paddle.cpp
-        include/ting_man_kan_justere_i_spillet/PaddleController.h
-        src/ting_man_kan/PaddleController.cpp
-        include/ting_man_kan_justere_i_spillet/Game.h
-        src/ting_man_kan/Game.cpp
+# Fetch Catch2
+FetchContent_Declare(
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+        GIT_TAG v3.7.0
 )
+FetchContent_MakeAvailable(Catch2)
 
-# Link libraries
-target_link_libraries(threepp_demo PRIVATE threepp::threepp imgui::imgui)
+# Enable testing
+enable_testing()
 
-######### Emscripten #######
-if (DEFINED EMSCRIPTEN)
+# Add subdirectories
+add_subdirectory(external)
+add_subdirectory(tests)
+add_subdirectory(src)
 
-    set(LINK_FLAGS " --bind -sUSE_GLFW=3 -sGL_DEBUG=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \
-    -sFULL_ES3 -sASSERTIONS -sALLOW_MEMORY_GROWTH -sWASM=1")
+# Include header files
 
-    set_target_properties("demo"
-            PROPERTIES SUFFIX ".html"
-            LINK_FLAGS "${LINK_FLAGS}"
-    )
+# Add main executable
+add_executable(PingPong main.cpp)
 
-endif ()
-###########################
+# Link main executable with necessary libraries
+target_link_libraries(PingPong PRIVATE threepp::threepp imgui::imgui ping_pong_lib)

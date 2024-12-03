@@ -1,8 +1,14 @@
-add_executable(test1 test1.cpp)
+add_executable(collisionTest collisionTest.cpp
+        pastPaddleTest.cpp)
 
-add_test(NAME test1 COMMAND test1)
+target_link_libraries(collisionTest PRIVATE Catch2::Catch2WithMain ping_pong_lib)
 
+add_test(NAME collisionTest COMMAND collisionTest)
 
-target_link_libraries(test1 PRIVATE Catch2::Catch2WithMain)
+target_include_directories(collisionTest PUBLIC "${CMAKE_SOURCE_DIR}/include")
 
-target_include_directories(test1 PUBLIC "${CMAKE_SOURCE_DIR}/include")
+add_executable(simpleTest simpleTest.cpp)
+
+target_link_libraries(simpleTest PRIVATE Catch2::Catch2WithMain)
+
+add_test(NAME simpleTest COMMAND simpleTest)

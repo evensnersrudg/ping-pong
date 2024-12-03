@@ -1,20 +1,31 @@
 # Pong Game 🎮
 
-A classic Pong game implemented in [your preferred programming language]. 
-This project is a fun and straightforward recreation of the iconic two-player arcade game.
+A classic Pong game implemented in C++ using modern libraries like **threepp** for rendering and **Catch2** for unit testing. 
+This project is a fun and straightforward recreation of the iconic two-player arcade game with some customizable features.
 
 ---
 
 ## Features
-- **Single-player mode**: Play against a computer opponent.
 - **Two-player mode**: Challenge a friend in a local multiplayer match.
-- **Customizable settings**: Adjust paddle speed, ball speed, and game difficulty.
-- **Score tracking**: Keep track of scores during the match.
-- **Fun**: Have the time of your life.
+- **Collision logic**: Realistic ball bounces off paddles and walls.
+- **Score tracking**: Tracks and displays scores for both players.
+- **Game restart**: Automatically resets the game after a score.
+- **Simple controls**: Intuitive keyboard-based paddle movement.
 
 ---
 
 ## How to Play
-1. Run the game using [instructions specific to your setup].
-2. Use the following controls to move your paddle:
-   - **Player 1**: `
+1. **Start the game**:
+   - Press the `B` key to begin the match.
+2. **Player controls**:
+   - **Player 1** (Left Paddle):
+      - Move up: `W`
+      - Move down: `S`
+   - **Player 2** (Right Paddle):
+      - Move up: `O`
+      - Move down: `L`
+3. **Objective**:
+   - Prevent the ball from passing your paddle.
+   - Earn points by making the ball pass your opponent's paddle.
+
+---
