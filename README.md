@@ -38,3 +38,9 @@ This is the UML diagram for the project structure:
 
 ![UML Diagram](UML.png)
 
+---
+
+## References
+
+ - OpenAI. (2024). ChatGPT (Dec 3, 2024 version). Retrieved from https://chat.openai.com/
+
