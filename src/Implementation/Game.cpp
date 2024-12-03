@@ -1,4 +1,4 @@
-#include "ting_man_kan_justere_i_spillet/Game.hpp"
+#include "GameObjects/Game.hpp"
 #include <threepp/threepp.hpp>
 #include <iostream> // For printing the scores
 

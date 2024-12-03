@@ -1,7 +1,7 @@
 #ifndef PADDLECONTROLLER_H
 #define PADDLECONTROLLER_H
 
-#include "ting_man_kan_justere_i_spillet/Paddle.hpp"
+#include "GameObjects/Paddle.hpp"
 #include <threepp/threepp.hpp>
 
 // This class handles paddle movement based on player input

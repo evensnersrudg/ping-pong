@@ -1,8 +1,8 @@
 add_library(ping_pong_lib
-        ting_man_kan/Ball.cpp
-        ting_man_kan/Game.cpp
-        ting_man_kan/Paddle.cpp
-        ting_man_kan/PaddleController.cpp
+        Implementation/Ball.cpp
+        Implementation/Game.cpp
+        Implementation/Paddle.cpp
+        Implementation/PaddleController.cpp
 )
 
 # Inkluder header-filene

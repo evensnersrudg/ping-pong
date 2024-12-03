@@ -1,4 +1,4 @@
-#include "ting_man_kan_justere_i_spillet/Ball.hpp"
+#include "GameObjects/Ball.hpp"
 using namespace threepp;
 
 Ball::Ball() {

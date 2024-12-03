@@ -1,4 +1,4 @@
-#include "ting_man_kan_justere_i_spillet/Paddle.hpp"
+#include "GameObjects/Paddle.hpp"
 
 using namespace threepp;
 
