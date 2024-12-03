@@ -12,3 +12,9 @@ add_executable(simpleTest simpleTest.cpp)
 target_link_libraries(simpleTest PRIVATE Catch2::Catch2WithMain)
 
 add_test(NAME simpleTest COMMAND simpleTest)
+
+add_executable(pastPaddleTest pastPaddleTest.cpp)
+
+target_link_libraries(pastPaddleTest PRIVATE Catch2::Catch2WithMain ping_pong_lib)
+
+add_test(NAME pastPaddleTest COMMAND pastPaddleTest)

@@ -1,7 +1,7 @@
 # Pong Game 🎮
 
 A classic Pong game implemented in C++ using modern libraries like **threepp** for rendering and **Catch2** for unit testing. 
-This project is a fun and straightforward recreation of the iconic two-player arcade game with some customizable features.
+This project is a fun and straightforward recreation of the iconic two-player arcade game
 
 ---
 
@@ -29,3 +29,10 @@ This project is a fun and straightforward recreation of the iconic two-player ar
    - Earn points by making the ball pass your opponent's paddle.
 
 ---
+
+## UML Diagram
+
+This is the UML diagram for the project structure:
+
+![UML Diagram](UML.png)
+
